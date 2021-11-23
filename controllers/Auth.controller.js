@@ -1,4 +1,7 @@
 const User = require("../models/User.model");
+const argon2 = require('argon2')
+const jwt = require('jsonwebtoken')
+
 module.exports = {
   auth: async (req, res, next) => {
     try {
