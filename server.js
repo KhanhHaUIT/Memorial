@@ -1,7 +1,12 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const app = express();
 
+if(process.env.NODE_ENV !== 'production'){
+  const morgan = require("morgan");
+  app.use(morgan('dev'));
+}
 const connectDB = async () => {
   try {
     await mongoose.connect(
@@ -21,12 +26,23 @@ const connectDB = async () => {
 
 connectDB();
 
-const app = express();
+
+
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
 app.use('/api/auth', require("./routes/auth.route"));
+app.use('/api/memorials', require("./routes/memorial.route"));
+app.use((req, res, next) => {
+  res.status(404).json({
+    success: false,
+    message: "Not found",
+  });
+})
+
+
 const PORT = process.env.PORT || 4000;
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
