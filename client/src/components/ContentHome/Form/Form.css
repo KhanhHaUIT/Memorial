@@ -1,0 +1,139 @@
+.col-6 {
+    max-width: 100%;
+    padding: 0;
+}
+.form-gui {
+    max-width: 890px;
+}
+
+.tab-default.line {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.tab-default a {
+    font: 34px "Merriweather", serif;
+    color: #bdbdbd;
+    display: inline-block;
+    padding-bottom: 20px;
+    margin-right: 64px;
+    font-weight: 400;
+}
+.tab-default a.active {
+    color: #484b3a;
+    border-bottom: 2px solid #6c370d;
+}
+
+.form-gui .form-default .colum {
+    -webkit-column-gap: 87px;
+    -moz-column-gap: 87px;
+    column-gap: 87px;
+    row-gap: 0;
+}
+.grid {
+    margin-top: 20px;
+}
+.grid__2 {
+    grid-template-columns: repeat(2, 1fr);
+}
+.grid {
+    display: -ms-grid;
+    display: grid;
+    width: 100%;
+}
+.form-default .form-group {
+    margin-bottom: 24px;
+    position: relative;
+}
+.form-default .form-group label {
+    color: #222222;
+    margin-bottom: 5px;
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+}
+.form-default .form-group label sup {
+    color: red;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"] {
+    background: #fff;
+    color: #757575;
+    float: none;
+    width: 100%;
+    height: 56px;
+    border: 1px solid rgba(89, 21, 0, 0.1);
+    border-radius: 8px;
+    font-size: 16px;
+    padding: 0 12px;
+    outline: none;
+    font-family: arial;
+    -webkit-transition-duration: 200ms;
+    transition-duration: 200ms;
+    -webkit-transition-property: all;
+    transition-property: all;
+    -webkit-transition-timing-function: cubic-bezier(0.7, 1, 0.7, 1);
+    transition-timing-function: cubic-bezier(0.7, 1, 0.7, 1);
+}
+
+.form-gui .form-default .year {
+    max-width: 256px;
+}
+[class*="grid__"] {
+    -webkit-column-gap: 16px;
+    -moz-column-gap: 16px;
+    column-gap: 16px;
+    row-gap: 16px;
+    position: relative;
+}
+.form-default .form-group select.form-control {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+.select2-container {
+    box-sizing: border-box;
+    display: inline-block;
+    margin: 0;
+    position: relative;
+    vertical-align: middle;
+}
+
+/* Address */
+.form-gui .form-default .lbl-title {
+    font-size: 16px;
+    font-weight: bold;
+    color: #222222;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.select2-hidden-accessible {
+    height: 56px;
+    border: 1px solid rgba(89, 21, 0, 0.1);
+    font-size: 16px;
+    color: #757575;
+    border-radius: 4px;
+}
+textarea.form-control {
+    padding-top: 10px;
+    outline: none;
+    width: 360px;
+}
+.form-gui .form-default .note {
+    color: #757575;
+    margin-top: 8px;
+}
+
+.mt40 button {
+    width: 120px;
+}
+
+.form-gui .form-default .dk {
+    text-decoration-line: underline;
+    font-size: 14px;
+    color: #757575;
+    margin-top: 16px;
+    display: block;
+}

@@ -16,7 +16,6 @@ const RegisterForm = () => {
     repeatPassword: "",
   });
 
-  const [alert, setAlert] = useState(null);
 
   const { username, password, repeatPassword } = RegisterForm;
 
