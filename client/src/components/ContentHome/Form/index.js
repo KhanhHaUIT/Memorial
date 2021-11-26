@@ -1,6 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Form.css";
+import {provinces} from '../../../constants'
 export default function Form() {
+  const [formData, setFormData] = useState({
+    deceasedPersonName: "",
+    senderName: "",
+    birthYear: "",
+    deathYear: "",
+    province: "",
+    district: "",
+    remembranceWords: "",
+    relationship: "",
+    email: "",
+    phone: "",
+  });
   return (
     <section className="section-frame2 clearfix">
       <div className="container">
@@ -22,7 +35,7 @@ export default function Form() {
                       </label>
                       <input
                         type="text"
-                        name="grname"
+                        name="deceasedPersonName"
                         id="grname"
                         className="form-control"
                       />
@@ -37,7 +50,7 @@ export default function Form() {
                         <label>Năm sinh</label>
                         <select
                           className="form-control select2 select2-hidden-accessible"
-                          name="namsinh"
+                          name="birthYear"
                           id="namsinh"
                           data-select2-id="select2-data-namsinh"
                           tabIndex={-1}
@@ -192,7 +205,7 @@ export default function Form() {
                         <label>Năm mất</label>
                         <select
                           className="form-control select2 select2-hidden-accessible"
-                          name="nammat"
+                          name="deathYear"
                           id="nammat"
                           data-select2-id="select2-data-nammat"
                           tabIndex={-1}
@@ -250,7 +263,7 @@ export default function Form() {
                       <div className="grid grid__2 ">
                         <div className="form-group">
                           <select
-                            name="tinhthanh"
+                            name="province"
                             id="tinhthanh"
                             className="select2 select2-hidden-accessible"
                             data-select2-id="select2-data-tinhthanh"
@@ -260,69 +273,23 @@ export default function Form() {
                             <option value data-select2-id="select2-data-7-aagn">
                               Chọn tỉnh thành
                             </option>
-                            <option value={2}> Hà Nội</option>
-                            <option value={3}> TP Hồ Chí Minh</option>
-                            <option value={4}> Bình Dương</option>
-                            <option value={5}> Đà Nẵng</option>
-                            <option value={6}> Hải Phòng</option>
-                            <option value={7}> Long An</option>
-                            <option value={8}> Bà Rịa Vũng Tàu</option>
-                            <option value={9}> An Giang</option>
-                            <option value={10}> Bắc Giang</option>
-                            <option value={11}> Bắc Kạn</option>
-                            <option value={12}> Bạc Liêu</option>
-                            <option value={13}> Bắc Ninh</option>
-                            <option value={14}> Bến Tre</option>
-                            <option value={15}> Bình Định</option>
-                            <option value={16}> Bình Phước</option>
-                            <option value={17}> Bình Thuận</option>
-                            <option value={18}> Cà Mau</option>
-                            <option value={19}> Cần Thơ</option>
-                            <option value={20}> Cao Bằng</option>
-                            <option value={21}> Đắk Lắk</option>
-                            <option value={22}> Đắk Nông</option>
-                            <option value={23}> Điện Biên</option>
-                            <option value={24}> Đồng Nai</option>
-                            <option value={25}> Đồng Tháp</option>
-                            <option value={26}> Gia Lai</option>
-                            <option value={27}> Hà Giang</option>
-                            <option value={28}> Hà Nam</option>
-                            <option value={29}> Hà Tĩnh</option>
-                            <option value={30}> Hải Dương</option>
-                            <option value={31}> Hậu Giang</option>
-                            <option value={32}> Hòa Bình</option>
-                            <option value={33}> Hưng Yên</option>
-                            <option value={34}> Khánh Hòa</option>
-                            <option value={35}> Kiên Giang</option>
-                            <option value={36}> Kon Tum</option>
-                            <option value={37}> Lai Châu</option>
-                            <option value={38}> Lâm Đồng</option>
-                            <option value={39}> Lạng Sơn</option>
-                            <option value={40}> Lào Cai</option>
-                            <option value={41}> Nam Định</option>
-                            <option value={42}> Nghệ An</option>
-                            <option value={43}> Ninh Bình</option>
-                            <option value={44}> Ninh Thuận</option>
-                            <option value={45}> Phú Thọ</option>
-                            <option value={46}> Phú Yên</option>
-                            <option value={47}> Quảng Bình</option>
-                            <option value={48}> Quảng Nam</option>
-                            <option value={49}> Quảng Ngãi</option>
-                            <option value={50}> Quảng Ninh</option>
-                            <option value={51}> Quảng Trị</option>
-                            <option value={52}> Sóc Trăng</option>
-                            <option value={53}> Sơn La</option>
-                            <option value={54}> Tây Ninh</option>
-                            <option value={55}> Thái Bình</option>
-                            <option value={56}> Thái Nguyên</option>
-                            <option value={57}> Thanh Hóa</option>
-                            <option value={58}> Thừa Thiên Huế</option>
-                            <option value={59}> Tiền Giang</option>
-                            <option value={60}> Trà Vinh</option>
-                            <option value={61}> Tuyên Quang</option>
-                            <option value={62}> Vĩnh Long</option>
-                            <option value={63}> Vĩnh Phúc</option>
-                            <option value={64}> Yên Bái</option>
+
+                            {
+                              provinces.map((province, index) => {
+                                return (
+                                  <option
+                                    key={index}
+                                    value={province}
+                                  >
+                                    {province}
+                                  </option>
+                                );
+                              })
+                            }
+
+                          </select>
+                          <select>
+                            <option>Chọn quận huyện</option>
                           </select>
                           <span
                             className="select2 select2-container select2-container--default"
@@ -340,7 +307,6 @@ export default function Form() {
                                 aria-disabled="false"
                                 aria-labelledby="select2-tinhthanh-container"
                               >
-                                
                                 <span
                                   className="select2-selection__arrow"
                                   role="presentation"
@@ -368,7 +334,7 @@ export default function Form() {
                       </label>
                       <textarea
                         className="form-control"
-                        name="info"
+                        name="remembranceWords"
                         id="info"
                         rows={4}
                         style={{ height: 118 }}
@@ -388,7 +354,7 @@ export default function Form() {
                       </label>
                       <input
                         type="text"
-                        name="fname"
+                        name="senderName"
                         id="fname"
                         className="form-control"
                       />
@@ -402,7 +368,7 @@ export default function Form() {
                       <label>Mối quan hệ với người quá cố</label>
                       <input
                         type="text"
-                        name="mqh"
+                        name="relationship"
                         id="mqh"
                         className="form-control"
                       />
