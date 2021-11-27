@@ -38,7 +38,6 @@ module.exports = {
       relationship,
       email,
       phone,
-      
     } = req.body;
     try {
       const newMemorial = await Memorial.create({
@@ -52,9 +51,9 @@ module.exports = {
         relationship,
         email,
         phone,
-        userId: req.userId
+        userId: req.userId,
       });
-      res.json(newMemorial);
+      res.status(201).send(newMemorial);
     } catch (error) {
       res.status(500).json({
         success: false,
@@ -74,7 +73,6 @@ module.exports = {
       relationship,
       email,
       phone,
-
     } = req.body;
     try {
       const updatedMemorial = await Memorial.findByIdAndUpdate(
@@ -90,11 +88,30 @@ module.exports = {
           relationship,
           email,
           phone,
-          
         },
         { new: true }
       );
       res.json(updatedMemorial);
+    } catch (error) {
+      res.status(500).json({
+        success: false,
+        message: error.message,
+      });
+    }
+  },
+  toggleCandle: async (req, res) => {
+    try {
+      const memorial = await Memorial.findById(req.params.id);
+      let index = memorial.candles.indexOf(req.userId);
+      if (index > -1) {
+        memorial.candles.splice(index, 1);
+        memorial.save();
+      }else{
+        memorial.candles.push(req.userId);
+        memorial.save();
+      }
+
+      return res.json(updatedMemorial);
     } catch (error) {
       res.status(500).json({
         success: false,

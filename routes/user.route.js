@@ -9,5 +9,6 @@ router.post("/", userController.createUser);
 router.put("/:id", userController.updateUser);
 router.delete("/:id", userController.deleteUser);
 router.patch("/:id", userController.changePassword);
+router.get("/:id/memorials", userController.getMemorials);
 
 module.exports = router;

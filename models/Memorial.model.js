@@ -14,7 +14,7 @@ const MemorialSchema = new Schema(
     email: { type: String, required: true },
     phone: { type: String, default: "" },
     userId: { type: Schema.Types.ObjectId, ref: "users" },
-	candles: [{ type: mongoose.Types.ObjectId, ref: 'users' }]
+    candles: [{ type: mongoose.Types.ObjectId, ref: "users" }],
   },
   {
     timestamps: true,

@@ -5,12 +5,14 @@ const jwt = require('jsonwebtoken')
 module.exports = {
   auth: async (req, res, next) => {
     try {
-      const user = await User.findById(req.userId).select("-password");
+      const user = await User.findById(req.userId)
       if (!user)
         return res
           .status(400)
           .json({ success: false, message: "User not found" });
-      res.json({ success: true, user });
+      res.json({ success: true, user: {
+        id: user._id,
+      } });
     } catch (error) {
       console.log(error);
       res
