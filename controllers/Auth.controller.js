@@ -12,6 +12,8 @@ module.exports = {
           .json({ success: false, message: "User not found" });
       res.json({ success: true, user: {
         id: user._id,
+        role: user.role,
+        username: user.username
       } });
     } catch (error) {
       console.log(error);

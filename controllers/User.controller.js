@@ -1,5 +1,6 @@
 const User = require("../models/User.model");
 const Memorial = require("../models/Memorial.model");
+const argon2 = require("argon2");
 
 module.exports = {
   getUsers: async (req, res) => {
@@ -44,7 +45,18 @@ module.exports = {
   },
   createUser: async (req, res) => {
     try {
-      const user = await User.create(req.body);
+      let user = await User.findOne({ username: req.body.username });
+      if (user) {
+        return res
+          .status(400)
+          .json({ success: true, message: "User already exists" });
+      }
+      const hashedPassword = await argon2.hash(req.body.password);
+      user = await User.create({
+        username: req.body.username,
+        password: hashedPassword,
+        role: req.body.role
+      });
       res.status(201).json(user);
     } catch (error) {
       res.status(500).json({ message: error.message });

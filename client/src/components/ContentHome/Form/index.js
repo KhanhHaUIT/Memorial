@@ -3,19 +3,15 @@ import "./Form.css";
 import { provinces, districts } from "../../../constants";
 import { MemorialContext } from "../../../contexts/MemorialContext";
 import { AuthContext } from "../../../contexts/AuthContext";
-import {useHistory} from 'react-router-dom'
+import { useHistory } from "react-router-dom";
 
 export default function Form() {
-  const {
-		addMemorial,
-	} = useContext(MemorialContext)
+  const { addMemorial } = useContext(MemorialContext);
 
   const {
-		authState: {
-			isAuthenticated,
-		}
-	} = useContext(AuthContext)
-  const history = useHistory()
+    authState: { isAuthenticated },
+  } = useContext(AuthContext);
+  const history = useHistory();
 
   const [formData, setFormData] = useState({
     deceasedPersonName: "",
@@ -45,11 +41,23 @@ export default function Form() {
     }
   };
   const handleSubmitForm = () => {
-    if(!isAuthenticated){
-      alert('You need to login to continue')
-      history.push('/login')
-    }else{
+    if (!isAuthenticated) {
+      alert("You need to login to continue");
+      history.push("/login");
+    } else {
       addMemorial(formData);
+      setFormData({
+        deceasedPersonName: "",
+        senderName: "",
+        birthYear: "",
+        deathYear: "",
+        province: "",
+        district: "",
+        remembranceWords: "",
+        relationship: "",
+        email: "",
+        phone: "",
+      });
     }
   };
   return (

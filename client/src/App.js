@@ -7,30 +7,37 @@ import Dashboard from "./views/Dashboard";
 import ProtectedRoute from "./components/routing/ProtectedRoute";
 import About from "./views/About";
 import PostContextProvider from "./contexts/PostContext";
+import UserContextProvider from "./contexts/UserContext";
 import MemorialContextProvider from "./contexts/MemorialContext";
+import UsersManagement from "./views/UsersManagement";
+import MemorialsManagement from "./views/MemorialsManagements";
 
 function App() {
   return (
     <AuthContextProvider>
       <MemorialContextProvider>
         <PostContextProvider>
-          <Router>
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <Route
-                exact
-                path="/login"
-                render={(props) => <Auth {...props} authRoute="login" />}
-              />
-              <Route
-                exact
-                path="/register"
-                render={(props) => <Auth {...props} authRoute="register" />}
-              />
-              <ProtectedRoute exact path="/dashboard" component={Dashboard} />
-              <ProtectedRoute exact path="/about" component={About} />
-            </Switch>
-          </Router>
+          <UserContextProvider>
+            <Router>
+              <Switch>
+                <Route exact path="/" component={Home} />
+                <Route
+                  exact
+                  path="/login"
+                  render={(props) => <Auth {...props} authRoute="login" />}
+                />
+                <Route
+                  exact
+                  path="/register"
+                  render={(props) => <Auth {...props} authRoute="register" />}
+                />
+                <ProtectedRoute exact path="/dashboard" component={Dashboard} />
+                <ProtectedRoute exact path="/dashboard/users" component={UsersManagement} />
+                <ProtectedRoute exact path="/dashboard/memorials" component={MemorialsManagement} />
+                <ProtectedRoute exact path="/about" component={About} />
+              </Switch>
+            </Router>
+          </UserContextProvider>
         </PostContextProvider>
       </MemorialContextProvider>
     </AuthContextProvider>
