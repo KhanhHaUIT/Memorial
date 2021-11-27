@@ -30,7 +30,7 @@ export default function Header() {
           <div className="right-head">
             <a
               className="btn-default tuong_nho"
-              href="/thoi-su/tuong-nho-nan-nhan-covid-19#tuong-nho"
+              href="#tuong-nho"
               title="Gửi lời tưởng nhớ"
             >
               Gửi lời tưởng nhớ

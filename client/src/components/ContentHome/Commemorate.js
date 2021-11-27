@@ -43,8 +43,8 @@ export default function Commemorate() {
 
         <ul className="list-item d-flex justify-content-between align-items-center">
           {memorials.length > 0 &&
-            memorials.map((memorial) => (
-              <li>
+            memorials.map((memorial, index) => (
+              <li key={index}>
                 <div class="item">
                   <h3 className="title">
                     <a href="/" title="ABC">

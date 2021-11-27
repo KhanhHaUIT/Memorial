@@ -53,7 +53,7 @@ export default function Form() {
     }
   };
   return (
-    <section className="section-frame2 clearfix">
+    <section className="section-frame2 clearfix" id="tuong-nho">
       <div className="container">
         <div className="min-container form-gui thanks_form">
           <div className="tab-default line">
