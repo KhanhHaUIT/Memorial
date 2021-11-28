@@ -4,32 +4,53 @@ module.exports = {
     // **************************
     // *  GET COMMENTS
     // **************************
-    getComments: (req, res) => {
-        Comment.find({
-            memorialId: req.params.memorialId
-        })
-            .then(comments => {
+    getComments: async (req, res) => {
+        try {
+            console.log(req.params)
+            const comments = await Comment.find({
+                memorialId: req.params.id
+            }).populate('senderId', 'username');
+            console.log(comments);
                 res.json(comments)
+        } catch (error) {
+          console.log(error);
+          res.status(500).json({
+              status: false,   
+                message: 'Server Error'
             })
-            .catch(err => {
-                res.json(err)
-            })
+        }
     },
     // **************************
     // *  POST COMMENT
     // **************************
-    postComment: (req, res) => {
-        Comment.create({
-            userId: req.userId,
-            memorialId: req.params.memorialId,
-            message: req.body.message
-        })
-            .then(comment => {
-                res.json(comment)
+    postComment: async (req, res) => {
+        
+        // Comment.create({
+        //     senderId: req.userId,
+        //     memorialId: req.params.id,
+        //     message: req.body.message
+        // })
+        //     .then(comment => {
+        //         res.json(comment)
+        //     })
+        //     .catch(err => {
+        //         res.json(err)
+        //     })
+        try {
+            let comment = await Comment.create({
+                senderId: req.userId,
+                memorialId: req.params.id,
+                message: req.body.message
             })
-            .catch(err => {
-                res.json(err)
+            comment = await Comment.findById(comment._id).populate('senderId', 'username');
+            res.json(comment)
+        } catch (error) {
+            console.log(error);
+            res.status(500).json({
+                status: false,
+                message: 'Server Error'
             })
+        }
     },
     // **************************
     // *  DELETE COMMENT

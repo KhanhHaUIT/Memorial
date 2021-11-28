@@ -1,25 +1,53 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./DetailMemory.css";
 import { Link, useParams } from "react-router-dom";
-import Candle from "../../assets/candle.png";
-import {MemorialContext} from "../../contexts/MemorialContext";
-import shuffle from "../../utils/shuffle";
 
-export default function DetailMemory() {
+import { MemorialContext } from "../../contexts/MemorialContext";
+import ViewMoreMemorial from "./ViewMoreMemorial";
+import { AuthContext } from "../../contexts/AuthContext";
+import Comment from "./Comment";
+
+export default function DetailMemory({ memorials }) {
   const {
-    memorialState: {
-      memorial,
-      memorials
-    },
+    memorialState: { memorial },
     getMemorial,
-    getMemorials
+    addComment
   } = useContext(MemorialContext);
-  const {cardId} = useParams();
+  
+  const {
+    authState: {
+      user,
+      isAuthenticated,
+    }
+  } = useContext(AuthContext)
+  const [comment, setComment] = useState("");
+  const { cardId } = useParams();
   useEffect(() => {
     getMemorial(cardId);
-    getMemorials();
-  }, []);
-  console.log(memorial);
+  }, [cardId]);
+
+  const handleComment = (e) => {
+    e.preventDefault();
+    // addComment({
+    //   senderId: _id,
+    //   memorialId: memorial._id,
+    //   message: comment
+    // });
+    // setComment("");
+    if(!isAuthenticated){
+      alert("You must be logged in to comment")
+    }else{
+      addComment({
+        senderId: user._id,
+        memorialId: memorial._id,
+        message: comment
+      });
+      
+      
+      setComment("");
+    }
+  };
+  
   return (
     <section className="section page-detail top-detail">
       <div className="container">
@@ -99,16 +127,19 @@ export default function DetailMemory() {
               Thứ hai, 22/11/2021, 14:03 (GMT+7)
             </span>
           </div>
-          <h1 className="title-detail">{memorial?.deceasedPersonName} ({memorial?.birthYear} - {memorial?.deathYear})</h1>
-          <p className="description address">{memorial?.district}, {memorial?.province}</p>
+          <h1 className="title-detail">
+            {memorial?.deceasedPersonName} ({memorial?.birthYear} -{" "}
+            {memorial?.deathYear})
+          </h1>
+          <p className="description address">
+            {memorial?.district}, {memorial?.province}
+          </p>
           <article className="fck_detail ">
-            <p className="Normal">
-              {
-                memorial?.remembranceWords
-              }
-            </p>
+            <p className="Normal">{memorial?.remembranceWords}</p>
             <p className="author_mail">
-              <strong>{memorial?.relationship}: {memorial?.senderName}</strong>
+              <strong>
+                {memorial?.relationship}: {memorial?.senderName}
+              </strong>
             </p>
           </article>
           <div class="footer-content  width_common">
@@ -201,22 +232,32 @@ export default function DetailMemory() {
 
               {/* Bình luận */}
               <div className="input_comment width_common">
-                <form id="comment_post_form">
+                <form
+                  id="comment_post_form"
+                  onSubmit={handleComment}
+                  style={{ display: "flex" }}
+                >
                   <div className="box-area-input width_common">
                     <textarea
                       id="txtComment"
                       className="txt_comment block_input"
                       placeholder="Ý kiến của bạn"
-                      style={{ height: 30, maxHeight: 30 }}
+                      style={{ height: 30, maxHeight: 30, width: "650px" }}
                       defaultValue={""}
+                      onChange={(e) => setComment(e.target.value)}
+                      value={comment}
                     />
+
                     <span
                       className="note-count-text"
                       style={{ display: "none" }}
                     >
                       <span className="counter_world">0</span> / 1500 ký tự
                     </span>
-                  </div>
+                  </div>{" "}
+                  <button className="btn btn-info" type="submit">
+                    Gửi
+                  </button>
                   <span
                     className="error_lk error_txt_cmt"
                     style={{ display: "none" }}
@@ -495,110 +536,14 @@ export default function DetailMemory() {
                     height: "100%",
                   }}
                 >
-                  <div className="comment_item width_common">
-                    <div className="user_status" data-user-type={5}>
-                      <div className="info_avata_cmt">
-                        <a
-                          href="https://my.vnexpress.net/users/feed/1073803999"
-                          className="avata_coment"
-                          target="_blank"
-                        >
-                          <img
-                            src="https://s1.vnecdn.net/myvne/i/v1/graphics/img_60x60.gif"
-                            alt="Thảo Phạm"
-                          />
-                        </a>
-                        <div className="author-infor-parent">
-                          <p className="author-info">
-                            <a
-                              href="https://my.vnexpress.net/users/feed/1073803999"
-                              target="_blank"
-                              className
-                            >
-                              <strong>Thảo Phạm</strong>
-                            </a>
-                            <span className="txt_author">
-                              <span className="count-yk">1 ý kiến</span>
-                            </span>
-                          </p>
-                          <p className="recent-com">
-                            <a href="https://vnexpress.net/vo-thi-chung-1932-2021-4394395.html?commentid=43166942">
-                              Thương nhớ ngoại của chúng con vô cùng.
-                            </a>
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="sub_comment width_common clearfix" />
-                  </div>
+                  <Comment />
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="sidebar-2">
-          <div className="box-category list-comment">
-            <h2 className="title-cate">Xem thêm</h2>
-            <ul className="list-item">
-              {
-                memorials && shuffle(memorials).slice(0, 3).map((item, index) => (
-                  <li>
-                <div class="item">
-                  <h3 className="title">
-                    <Link to={`/${item._id}`} title="ABC">
-                      {item?.deceasedPersonName} ({item?.birthYear} - {item?.deathYear})
-                    </Link>
-                  </h3>
-                  <div className="address">{item?.district}, {item?.province}</div>
-                  <div className="item-comment">
-                    <div className="content_less">
-                      <p className="Normal">
-                        {
-                          item?.remembranceWords
-                        }
-                      </p>
-                    </div>
-                  </div>
-                  <p>{item?.relationship}</p>
-                  <div className="item-username">
-                    <div>{item?.senderName}</div>
-                  </div>
-
-                  <div className="social cmt-show" cmt-show={1}>
-                    <a
-                      className="item-like art-like-toggle usi_tl_4393713 usi_loaded"
-                      href="/"
-                      onClick="VNE.Comment_Ext.likeArticle(4393713)"
-                      data-aid={4393713}
-                      data-type={1}
-                      title="Thắp nến"
-                      data-total={74}
-                    >
-                      <div className="icon">
-                        <img src={Candle} alt="anh" />
-                      </div>
-                      <div className="text">
-                        Thắp nến
-                        <strong className="num">83</strong>
-                      </div>
-                    </a>
-                    <a
-                      className="count_cmt comment"
-                      href="/"
-                      style={{ whiteSpace: "nowrap", display: "none" }}
-                    >
-                      <span className="font_icon number widget-comment-4393713-1"></span>
-                    </a>
-                  </div>
-                </div>
-              </li>
-                ))
-              }
-            </ul>
-          </div>
-        </div>
+        <ViewMoreMemorial />
       </div>
     </section>
   );
