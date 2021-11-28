@@ -3,6 +3,7 @@ import { authReducer } from '../reducers/authReducer'
 import { apiUrl, LOCAL_STORAGE_TOKEN_NAME } from './constants'
 import axios from 'axios'
 import setAuthToken from '../utils/setAuthToken'
+import Swal from 'sweetalert2'
 
 export const AuthContext = createContext()
 
@@ -50,9 +51,18 @@ const AuthContextProvider = ({ children }) => {
 				)
 			console.log(response.data)
 			await loadUser()
-
+			Swal.fire({
+				title: 'Success',
+				text: 'Login success',
+				icon: 'success'
+			})
 			return response.data
 		} catch (error) {
+			Swal.fire({
+				title: 'Error',
+				text: 'Login failed',
+				icon: 'error'
+			})
 			if (error.response.data) return error.response.data
 			else return { success: false, message: error.message }
 		}

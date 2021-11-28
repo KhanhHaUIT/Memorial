@@ -14,7 +14,8 @@ export const FIND_POST = 'FIND_POST'
 
 
 export const ADD_MEMORIAL = 'ADD_MEMORAIL'
-export const GET_MEMORIALS = 'GET_MEMORAILS'
+export const GET_MEMORIALS = 'GET_MEMORIALS'
+export const GET_MEMORIAl = 'GET_MEMORIAL'
 
 export const GET_COMMENTS = 'GET_COMMENTS'
 export const ADD_COMMENT = 'ADD_COMMENT'

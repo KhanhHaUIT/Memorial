@@ -1,0 +1,295 @@
+
+.page-detail .container {
+    display: flex;
+    background: none;
+}
+.page-detail .social_pin {
+    z-index: 3;
+}
+
+.social_pin {
+    width: 65px;
+    padding-top: 150px;
+    position: sticky;
+    position: -webkit-sticky;
+    top: 0;
+    left: 0;
+    height: 100%;
+    padding-bottom: 20px;
+    opacity: 1;
+    visibility: visible;
+    z-index: 1;
+    transition-duration: 250ms;
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.7, 1, 0.7, 1);
+}
+
+.social_pin .social_left li:first-child {
+    margin-top: 0;
+}
+.social_pin .social_left li {
+    margin-top: 10px;
+    width: 32px;
+}
+.page-detail .social_pin .social_left li a {
+    background: #e7f5ed;
+    border: 0;
+    width: 36px;
+    height: 36px;
+    justify-content: center;
+    position: relative;
+    border-radius: 50%;
+    display: flex;
+}
+.page-detail .social_pin .social_left li a .bi {
+    fill: #222;
+    align-self: center;
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+    font-size: 18px;
+    display: flex;
+}
+
+.page-detail.top-detail .sidebar-1 {
+    width: 100%;
+    max-width: calc(100% - 430px);
+    padding: 20px 0 0 0;
+    position: relative;
+}
+.breadcrumb {
+    background: none;
+    display: block;
+    padding: 0;
+}
+
+.page-detail .header-content,
+.page-detail .width-detail-photo {
+    margin-bottom: 10px;
+}
+.page-detail .breadcrumb li:first-child {
+    color: #6c370d;
+    font-weight: bold;
+}
+.breadcrumb li {
+    position: relative;
+    display: inline-block;
+    line-height: 16px;
+    font-size: 14px;
+    color: #757575;
+    margin-right: 25px;
+    padding: 0;
+}
+
+.breadcrumb li:first-child:after {
+    display: none;
+}
+
+.page-detail .breadcrumb li {
+    color: #35140a;
+}
+
+.breadcrumb li:after {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-top: 1px solid #bdbdbd;
+    border-right: 1px solid #bdbdbd;
+    transform: rotate(45deg);
+    position: absolute;
+    left: -19px;
+    top: 5px;
+}
+.page-detail .title-detail {
+    font-size: 18px;
+    margin-bottom: 5px;
+    line-height: 150%;
+    font-family: "Merriweather", serif;
+    font-weight: bold;
+}
+.page-detail .address {
+    color: #757575;
+    font-size: 14px;
+    line-height: 160%;
+    font-weight: 400;
+    margin-bottom: 15px;
+}
+
+.fck_detail {
+    width: 100%;
+
+    position: relative;
+    font: 400 18px arial;
+    line-height: 160%;
+    padding: 0;
+    color: #222;
+}
+.fck_detail .Normal,
+.fck_detail p {
+    margin: 0 0 1em;
+    line-height: 160%;
+    text-rendering: optimizeSpeed;
+    font-size: 18px;
+    font-family: var(--font);
+}
+.page-detail .author_mail {
+    width: 100%;
+
+    margin-bottom: 20px;
+}
+.page-detail .author,
+.page-detail .author_mail {
+    text-align: right;
+    font-size: 18px;
+}
+.page-detail .footer-content {
+    margin-bottom: 20px;
+    display: flex;
+}
+.page-detail .footer-content .back-folder.minus {
+    padding: 0 10px;
+}
+.page-detail .footer-content .back-folder {
+    width: 48px;
+    border-radius: 50%;
+    border: 1px solid #bdbdbd;
+    margin-right: 8px;
+}
+.page-detail .footer-content .save {
+    line-height: 48px;
+    height: 48px;
+}
+
+.page-detail .footer-content .back-folder .bi-arrow-left {
+    fill: #000;
+    width: 18px;
+    height: 18px;
+    font-size: 30px;
+}
+
+.page-detail .footer-content .item-like {
+    background: #ffffff;
+    border: 1px solid #bdbdbd;
+    border-radius: 4px;
+    padding: 5px 8px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    color: #7e7e7e;
+}
+.page-detail .footer-content .social {
+    margin-left: auto;
+    display: flex;
+}
+.page-detail .footer-content .social .txt {
+    line-height: 40px;
+    color: #4f4f4f;
+}
+.page-detail .footer-content .social a {
+    width: 48px;
+    height: 48px;
+    background: #f4f5f7;
+    border: 0;
+    margin-left: 8px !important;
+    align-self: center;
+    justify-content: center;
+    display: flex;
+}
+
+.page-detail .footer-content .social a .bi {
+    font-size: 28px;
+}
+
+/* Bình luận */
+.page-detail .section-comment {
+    border-top: 1px solid #e5e5e5;
+    padding-top: 40px;
+    margin-top: 30px;
+}
+.page-detail .section-comment {
+    width: 100%;
+    float: left;
+    position: relative;
+    z-index: 1;
+}
+
+.page-detail .ykien_vne h3 {
+    color: #6c370d;
+    font-size: 24px;
+}
+.box-area-input {
+    border: 1px solid #bdbdbd;
+    border-radius: 3px;
+    position: relative;
+    padding: 10px 0 10px 0;
+}
+.input_comment textarea.block_input {
+    height: 30px;
+    max-height: 30px;
+    -webkit-transition-duration: 200ms;
+    transition-duration: 200ms;
+    -webkit-transition-property: all;
+    transition-property: all;
+    -webkit-transition-timing-function: cubic-bezier(0.7, 1, 0.7, 1);
+    transition-timing-function: cubic-bezier(0.7, 1, 0.7, 1);
+    overflow: hidden;
+    resize: none;
+}
+.input_comment textarea {
+    font: 400 15px/150% arial;
+    background: #fff;
+    border: none;
+    width: 100%;
+    height: 58px;
+    color: #666 !important;
+    overflow: hidden;
+    padding: 5px 37px 0 15px;
+}
+
+.info_avata_cmt {
+    display: flex;
+}
+.avata_coment {
+    margin-right: 10px;
+}
+#box_comment {
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+/* Sidebar 2 */
+.page-detail.top-detail .sidebar-2 {
+    width: 100%;
+    max-width: 365px;
+    padding: 20px 0 0 65px;
+}
+.list-comment {
+    margin-bottom: 100px;
+    position: relative;
+}
+.page-detail .sidebar-2 .title-cate {
+    margin-bottom: 15px;
+    text-align: left;
+    font-size: 18px;
+    font-weight: bold;
+    color: #191919;
+    display: block;
+    font-family: var(--font);
+}
+.list-comment .list-item {
+    width: calc(100% + 30px);
+}
+
+.sidebar-2 .list-comment .list-item li {
+    padding: 0;
+    width: 100%;
+}
+.sidebar-2 .list-comment .list-item li p{
+    font-family: var(--font);
+}

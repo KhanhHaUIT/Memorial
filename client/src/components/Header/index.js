@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import "./Header.css";
+import { Link } from "react-router-dom";
+import { AuthContext } from "../../contexts/AuthContext";
 
 export default function Header() {
+  const [openMobile, setOpenMobile] = useState(false);
+  const {
+    authState: { isAuthenticated },
+  } = useContext(AuthContext);
   return (
     <>
       <section className="wrap-main-nav" id="wrap-main-nav">
@@ -13,19 +19,12 @@ export default function Header() {
                 alt="VnExpress"
               />
             </a>
-            <a href="/" className="back-vne" title="VnExpress">
-              <span>Trở về VnExpress</span>
-            </a>
           </div>
 
           <h1 className="title">
-            <a
-              className="btn-default tuong_nho"
-              href="/thoi-su/tuong-nho-nan-nhan-covid-19"
-              title="Tưởng nhớ hơn 23.000 cuộc đời đã mất"
-            >
-              Tưởng nhớ hơn 23.000 cuộc đời đã mất
-            </a>
+            <Link to="/" title="Tưởng nhớ hơn 23.000 cuộc đời đã mất" className="btn-default tuong_nho">
+            Tưởng nhớ hơn 23.000 cuộc đời đã mất
+            </Link>
           </h1>
           <div className="right-head">
             <a
@@ -35,35 +34,57 @@ export default function Header() {
             >
               Gửi lời tưởng nhớ
             </a>
-            {/* <div className="social">
-              <a
-                href="facebook.com"
-                className="face fb_share"
-                data-type="fb_share"
-                rel="nofollow"
-                title="Facebook"
-              >
-                <svg className="ic ic-facebook">
-                  <use xlinkHref="#Facebook" />
-                </svg>
-              </a>
-              <a
-                href="twitter.com"
-                className="twitter tw_share"
-                data-type="tw_share"
-                title="Twitter"
-              >
-                <svg className="ic ic-twitter">
-                  <use xlinkHref="#Twitter" />
-                </svg>
-              </a>
-              <a href="javascript:;" id="vibeji-ham" className="item">
-                <span /> <span /> <span />
-              </a>
-            </div> */}
+            <a
+              href="javascript:;"
+              id="vibeji-ham"
+              className="item"
+              onClick={() => setOpenMobile(!openMobile)}
+            >
+              <span /> <span /> <span />
+            </a>
           </div>
         </div>
       </section>
+      <div className={openMobile ? "topnav-mobile open " : "topnav-mobile "}>
+        <ul className="menu">
+          <li className="active">
+            <Link to="/" title="Trang chủ">
+              Trang chủ
+            </Link>
+          </li>
+          <li>
+            
+            <a href="#tuong-nho">
+            Tưởng nhớ
+            </a>
+          </li>
+        </ul>
+        <div className="fix-button">
+          <div className="mb24" onClick={() => setOpenMobile(!openMobile)}>
+            {isAuthenticated ? (
+              <>
+                <Link
+                  className="btn-default bg tuong_nho_menu"
+                  to="/dashboard"
+                  style={{ fontSize: 16 }}
+                >
+                  Dashboard
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link
+                  className="btn-default bg tuong_nho_menu"
+                  to="/login"
+                  style={{ fontSize: 16 }}
+                >
+                  Login
+                </Link>
+              </>
+            )}
+          </div>
+        </div>
+      </div>
     </>
   );
 }

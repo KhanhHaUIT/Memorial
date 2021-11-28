@@ -1,7 +1,9 @@
 import React from "react";
 import "./Background.css";
+import { useParams } from "react-router";
 
 export default function Background() {
+  const param = useParams();
   return (
     <>
       <section className="section-frame1 clearfix">
@@ -22,6 +24,17 @@ export default function Background() {
             >
               Gửi lời tưởng nhớ
             </a>
+            {param.cardId ? (
+              <></>
+            ) : (
+              <a
+                className="btn-default bg tuong_nho"
+                href="javascript:;"
+                title="Gửi lời tưởng nhớ"
+              >
+                Gửi lời tưởng nhớ
+              </a>
+            )}
           </div>
           <a className="scroll_down v2 hidden-pc" href="javascript:;">
             <div className="scroll_down_btn">

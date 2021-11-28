@@ -1,10 +1,12 @@
 import {
     ADD_MEMORIAL,
     GET_MEMORIALS,
+    
     GET_COMMENTS,
     ADD_COMMENT,
     DELETE_COMMENT,
-    UPDATE_COMMENT
+    UPDATE_COMMENT,
+    GET_MEMORIAl
 
 } from '../contexts/constants'
 
@@ -17,6 +19,11 @@ export const memorialReducer = (state, action) => {
                     ...state.memorials,
                     action.payload
                 ]
+            }
+        case GET_MEMORIAl:
+            return {
+                ...state,
+                memorial: action.payload
             }
         case GET_MEMORIALS:
             return {

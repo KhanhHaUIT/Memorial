@@ -379,7 +379,7 @@ export default function Form() {
                       <label>Số điện thoại</label>
                       <input
                         type="tel"
-                        onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+                        onKeyPress="return event.charCode >= 48 && event.charCode <= 57"
                         name="phone"
                         value={formData.phone}
                         onChange={handleChange}

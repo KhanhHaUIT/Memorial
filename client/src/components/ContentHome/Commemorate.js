@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from "react";
 import "./Commemorate.css";
 import Candle from "../../assets/candle.png";
 import { MemorialContext } from "../../contexts/MemorialContext";
-
+import { Link } from "react-router-dom";
 
 export default function Commemorate() {
   const {
@@ -36,7 +36,7 @@ export default function Commemorate() {
               className="btn-search-vne"
               id="searchForum"
             >
-              <i class="bi bi-search"></i>
+              <i className="bi bi-search"></i>
             </button>
           </div>
         </div>
@@ -47,9 +47,9 @@ export default function Commemorate() {
               <li key={index}>
                 <div class="item">
                   <h3 className="title">
-                    <a href="/" title="ABC">
+                   <Link to={`/${memorial._id}`} title="ABC"> 
                       {memorial?.deceasedPersonName}
-                    </a>
+                    </Link>
                   </h3>
                   <div className="address">
                     {memorial?.district}, {memorial?.province}

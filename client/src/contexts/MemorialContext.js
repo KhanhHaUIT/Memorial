@@ -3,6 +3,7 @@ import {
     apiUrl,
     ADD_MEMORIAL,
     GET_MEMORIALS,
+    GET_MEMORIAl,
     GET_COMMENTS,
     UPDATE_COMMENT,
     ADD_COMMENT,
@@ -45,6 +46,14 @@ const MemorialContextProvider = ({ children }) => {
         const res = await axios.get(`${apiUrl}/memorials`)
         dispatch({
             type: GET_MEMORIALS,
+            payload: res.data
+        })
+    }
+
+    const getMemorial = async (id) => {
+        const res = await axios.get(`${apiUrl}/memorials/${id}`)
+        dispatch({
+            type: GET_MEMORIAl,
             payload: res.data
         })
     }
@@ -128,6 +137,7 @@ const MemorialContextProvider = ({ children }) => {
             commentState,
             addMemorial,
             getMemorials,
+            getMemorial,
             getComments,
             updateComment,
             addComment,

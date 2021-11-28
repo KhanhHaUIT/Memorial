@@ -54,13 +54,13 @@ input[type="text"] {
 }
 .box-search .btn-search-vne {
     position: absolute;
-    right: 0px;
-    top: 1px;
+    right: 5px;
+    top: 5px;
     border: 0;
     background: #ffd18b;
     border-radius: 10px 0px;
-    width: 40px;
-    height: 38px;
+    width: 45px;
+    height: 45px;
 }
 .box-search .btn-search-vne .bi-search {
     fill: #222222;

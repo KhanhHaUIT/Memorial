@@ -11,6 +11,7 @@ import UserContextProvider from "./contexts/UserContext";
 import MemorialContextProvider from "./contexts/MemorialContext";
 import UsersManagement from "./views/UsersManagement";
 import MemorialsManagement from "./views/MemorialsManagements";
+import DetailMemorial from './views/DetailMemorial'
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Router>
               <Switch>
                 <Route exact path="/" component={Home} />
+                
                 <Route
                   exact
                   path="/login"
@@ -34,7 +36,7 @@ function App() {
                 <ProtectedRoute exact path="/dashboard" component={Dashboard} />
                 <ProtectedRoute exact path="/dashboard/users" component={UsersManagement} />
                 <ProtectedRoute exact path="/dashboard/memorials" component={MemorialsManagement} />
-                <ProtectedRoute exact path="/about" component={About} />
+                <Route exact path="/:cardId" component={DetailMemorial} />
               </Switch>
             </Router>
           </UserContextProvider>
