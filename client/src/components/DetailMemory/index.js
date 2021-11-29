@@ -3,16 +3,21 @@ import "./DetailMemory.css";
 import { Link, useParams } from "react-router-dom";
 
 import { MemorialContext } from "../../contexts/MemorialContext";
+import { CommentContext } from "../../contexts/CommentContext";
 import ViewMoreMemorial from "./ViewMoreMemorial";
 import { AuthContext } from "../../contexts/AuthContext";
 import Comment from "./Comment";
 
-export default function DetailMemory({ memorials }) {
+export default function DetailMemory() {
   const {
     memorialState: { memorial },
     getMemorial,
-    addComment
   } = useContext(MemorialContext);
+
+
+  const {
+    addComment
+  } = useContext(CommentContext);
   
   const {
     authState: {

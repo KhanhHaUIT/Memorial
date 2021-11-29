@@ -1,15 +1,19 @@
 import React, { memo, useEffect, useContext } from "react";
 import { MemorialContext } from "../../contexts/MemorialContext";
-
+import { CommentContext } from "../../contexts/CommentContext";
+import timeAgo from "../../utils/timeAgo";
 
 const Comment = () => {
 
   const {
-    commentState: { comments },
-    getComments,
     memorialState: { memorial }
     
   } = useContext(MemorialContext);
+
+  const {
+    commentState: { comments },
+    getComments
+  } = useContext(CommentContext);
   
   useEffect(() => {
     
@@ -17,7 +21,7 @@ const Comment = () => {
         getComments({memorialId: memorial._id});
     }
   }, [memorial]);
-  console.log(comments);
+  console.log(memorial);
   return (
     <>
       {comments?.map((comment) => (
@@ -43,8 +47,8 @@ const Comment = () => {
                   >
                     <strong>{comment?.senderId.username}</strong>
                   </a>
-                  <span className="txt_author">
-                    <span className="count-yk">1 ý kiến</span>
+                  <span className="txt_author" style={{marginLeft: "20px"}}>
+                    <span className="count-yk">{timeAgo(comment?.createdAt)}</span>
                   </span>
                 </p>
                 <p className="recent-com">

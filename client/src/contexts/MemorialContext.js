@@ -4,10 +4,7 @@ import {
   ADD_MEMORIAL,
   GET_MEMORIALS,
   GET_MEMORIAl,
-  GET_COMMENTS,
-  UPDATE_COMMENT,
-  ADD_COMMENT,
-  DELETE_COMMENT,
+  DELETE_MEMORIALS
 } from "./constants";
 import { memorialReducer, commentReducer } from "../reducers/memorialReducer";
 import axios from "axios";
@@ -20,10 +17,6 @@ const MemorialContextProvider = ({ children }) => {
     memorials: [],
     // memorialsLoading: true,
     memorial: null,
-  });
-
-  const [commentState, commentDispatch] = useReducer(commentReducer, {
-    comments: [],
   });
 
   // Actions
@@ -57,65 +50,8 @@ const MemorialContextProvider = ({ children }) => {
     });
   };
 
-  const getComments = async ({ memorialId }) => {
-    const res = await axios.get(`${apiUrl}/memorials/${memorialId}/comments`);
-    commentDispatch({
-      type: GET_COMMENTS,
-      payload: res.data,
-    });
-  };
-
-  const updateComment = async ({ memorialId, commentId, values }) => {
-    try {
-      const res = await axios.put(
-        `${apiUrl}/memorials/${memorialId}/comments/${commentId}`,
-        values
-      );
-      commentDispatch({
-        type: UPDATE_COMMENT,
-        payload: res.data,
-      });
-      toastSweet("success", "Comment updated successfully");
-    } catch (error) {
-      console.log(error);
-      toastSweet("error", "Error updating comment");
-    }
-  };
-
-  const addComment = async (values) => {
-    try {
-      const res = await axios.post(
-        `${apiUrl}/memorials/${values.memorialId}/comments`,
-        { message: values.message }
-      );
-      commentDispatch({
-        type: ADD_COMMENT,
-        payload: res.data,
-      });
-      toastSweet("success", "Comment added successfully");
-    } catch (error) {
-      console.log(error);
-      toastSweet("error", "Error adding comment");
-    }
-  };
-
-  const deleteComment = async ({ memorialId, commentId }) => {
-    try {
-      const res = await axios.delete(
-        `${apiUrl}/memorials/${memorialId}/comments/${commentId}`
-      );
-      commentDispatch({
-        type: DELETE_COMMENT,
-        payload: res.data,
-      });
-      toastSweet("success", "Comment deleted successfully");
-    } catch (error) {
-      console.log(error);
-      toastSweet("error", "Error deleting comment");
-    }
-  };
-
   const getMemorialsByUser = async ({ userId }) => {
+    
     const res = await axios.get(`${apiUrl}/users/${userId}/memorials`);
     dispatch({
       type: GET_MEMORIALS,
@@ -123,19 +59,31 @@ const MemorialContextProvider = ({ children }) => {
     });
   };
 
+  const deleteMemorials = async (ids) => { 
+    try {
+      const res = await axios.delete(`${apiUrl}/memorials`, {
+        data: { ids }
+      });
+      dispatch({
+        type: DELETE_MEMORIALS,
+        payload: ids,
+      });
+      toastSweet("success", "Memorials deleted successfully");
+    } catch (err) {
+      toastSweet("error", err.response.data.message ||  err.message || 'Something is wrong')
+    }
+  };
+
   return (
     <MemorialContext.Provider
       value={{
         memorialState,
-        commentState,
         addMemorial,
         getMemorials,
         getMemorial,
-        getComments,
-        updateComment,
-        addComment,
         getMemorialsByUser,
-        deleteComment,
+        deleteMemorials
+ 
       }}
     >
       {children}

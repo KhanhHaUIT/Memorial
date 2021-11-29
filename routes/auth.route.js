@@ -12,4 +12,6 @@ router.post("/register", AuthController.register);
 
 router.post("/login", AuthController.login);
 
+router.patch('/change-password', verifyToken, AuthController.changePassword);
+
 module.exports = router;

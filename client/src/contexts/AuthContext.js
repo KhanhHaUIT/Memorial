@@ -4,6 +4,7 @@ import { apiUrl, LOCAL_STORAGE_TOKEN_NAME } from './constants'
 import axios from 'axios'
 import setAuthToken from '../utils/setAuthToken'
 import Swal from 'sweetalert2'
+import toastSweet from '../utils/toastSweet'
 
 export const AuthContext = createContext()
 
@@ -96,8 +97,23 @@ const AuthContextProvider = ({ children }) => {
 		})
 	}
 
+	// Change Password
+	const changePassword = async userForm => {
+		try {
+			const response = await axios.patch(
+				`${apiUrl}/auth/change-password`,
+				userForm
+			)
+			toastSweet('success', response.data.message)
+		}
+		catch (error) {
+			toastSweet('error', error.response.data.message || error.message)
+		}
+	}
+
+
 	// Context data
-	const authContextData = { loginUser, registerUser, logoutUser, authState }
+	const authContextData = { loginUser, registerUser, logoutUser, authState, changePassword }
 
 	// Return provider
 	return (

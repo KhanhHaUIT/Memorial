@@ -79,7 +79,8 @@ export default function Commemorate() {
                       </div>
                       <div className="text">
                         Thắp nến
-                        <strong className="num">74</strong>
+                        {" "}
+                        <strong className="num">{Math.floor(Math.random() * 100)}</strong>
                       </div>
                     </a>
                     <a href="/" className="face"></a>

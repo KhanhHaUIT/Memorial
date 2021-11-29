@@ -13,9 +13,11 @@ export const UPDATE_POST = 'UPDATE_POST'
 export const FIND_POST = 'FIND_POST'
 
 
+
 export const ADD_MEMORIAL = 'ADD_MEMORAIL'
 export const GET_MEMORIALS = 'GET_MEMORIALS'
 export const GET_MEMORIAl = 'GET_MEMORIAL'
+export const DELETE_MEMORIALS = 'DELETE_MEMORIALS'
 
 export const GET_COMMENTS = 'GET_COMMENTS'
 export const ADD_COMMENT = 'ADD_COMMENT'
@@ -27,3 +29,4 @@ export const GET_USER = 'GET_USER'
 export const GET_USERS = 'GET_USERS'
 export const DELETE_USER = 'DELETE_USER'
 export const UPDATE_USER = 'UPDATE_USER'
+export const DELETE_USERS = 'DELETE_USERS'

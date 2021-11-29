@@ -1,5 +1,6 @@
 const User = require("../models/User.model");
 const Memorial = require("../models/Memorial.model");
+const Comment = require("../models/Comment.model");
 const argon2 = require("argon2");
 
 module.exports = {
@@ -9,6 +10,35 @@ module.exports = {
       res.status(200).json(users);
     } catch (error) {
       res.status(500).json({ message: error.message });
+    }
+  },
+  deleteUsers: async (req, res) => {
+    if (Object.prototype.toString.call(req.body.ids) === '[object Array]') {
+      if (req.body.ids.indexOf(req.user._id.toString()) > -1) {
+        return res.status(400).json({
+          success: false,
+          message: 'You can not delete yourself !!',
+        });
+      }
+      try {
+        
+        await User.deleteMany({ _id: { $in: req.body.ids }});
+        return res.status(200).json({
+          success: true,
+          message: 'deleted successfully !!',
+          userIds: req.body.ids,
+        });
+      } catch (error) { 
+        return res.status(500).json({
+          success: false,
+          message: error.message || 'Internal Server Error',
+        });
+      }
+    } else {
+      return res.status(400).json({
+        success: false,
+        message: 'ids must be an array !!',
+      });
     }
   },
   updateUser: async (req, res) => {
@@ -83,6 +113,7 @@ module.exports = {
   },
   getMemorials: async (req, res) => {
     try {
+      console.log(req.params)
       const memorials = await Memorial.find({
         userId: req.params.id,
       });
@@ -91,4 +122,15 @@ module.exports = {
       res.status(500).json({ message: error.message });
     }
   },
+  getCommentsByMemorial: async (req, res) => {
+    try {
+      const comments = await Comment.find({
+        memorialId: req.params.memorialId,
+        userId: req.params.id,
+      });
+      res.status(200).json(comments);
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  }
 };

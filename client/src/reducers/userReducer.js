@@ -4,6 +4,7 @@ import {
   GET_USERS,
   DELETE_USER,
   UPDATE_USER,
+  DELETE_USERS
 } from "../contexts/constants";
 
 export const userReducer = (state = {}, action) => {
@@ -35,7 +36,11 @@ export const userReducer = (state = {}, action) => {
           user.id === action.payload.id ? action.payload : user
         ),
       };
-
+    case DELETE_USERS:
+      return {
+        ...state,
+        users: state.users.filter((user) => !action.payload.includes(user._id)),
+      };
     default:
       return state;
   }

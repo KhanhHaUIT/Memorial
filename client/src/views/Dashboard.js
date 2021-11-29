@@ -1,20 +1,9 @@
-import { PostContext } from "../contexts/PostContext";
 import { AuthContext } from "../contexts/AuthContext";
-import { UserContext } from "../contexts/UserContext";
-import { useContext, useEffect } from "react";
-import Spinner from "react-bootstrap/Spinner";
+import { useContext, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import Row from "react-bootstrap/Row";
-import Toast from "react-bootstrap/Toast";
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import Tooltip from "react-bootstrap/Tooltip";
-import Col from "react-bootstrap/Col";
-import SinglePost from "../components/posts/SinglePost";
-import AddPostModal from "../components/posts/AddPostModal";
-import UpdatePostModal from "../components/posts/UpdatePostModal";
-import addIcon from "../assets/plus-circle-fill.svg";
 import { useHistory } from "react-router";
+import ChangePassword  from  '../components/management/ChangePasswordModal'
 
 const Dashboard = () => {
   const history = useHistory();
@@ -24,129 +13,43 @@ const Dashboard = () => {
       user: { username, role },
     },
   } = useContext(AuthContext);
+  const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
 
-  const {
-    postState: { post, posts, postsLoading },
-    getPosts,
-    setShowAddPostModal,
-    showToast: { show, message, type },
-    setShowToast,
-  } = useContext(PostContext);
-
-  
-  // Effects
-
-  // Start: Get all posts
-  useEffect(() => getPosts(), []);
-
-  
-
-  let body = null;
-
-  if (role === "admin") {
-    return (
-      <>
-        <Card className="text-center mx-5 my-5">
-          <Card.Header as="h1">Hi {username}</Card.Header>
-          <Card.Body>
-            <Card.Title>Welcome to Anything Project</Card.Title>
-            <Card.Text>
-              Click the button below to manage users and posts.
-            </Card.Text>
+  return (
+    <>
+      <Card className="text-center mx-5 my-5">
+        <Card.Header as="h1">Hi {username}</Card.Header>
+        <Card.Body>
+          <Card.Title>Welcome to Anything Project</Card.Title>
+          <Card.Text>
+            Click the button below to go to{" "}
+            {role === "admin" ? "users and memorials" : "memorials"}{" "}
+            managements.
+          </Card.Text>
+          {role === "admin" ? (
             <Button
               variant="primary"
               onClick={() => history.push("/dashboard/users")}
             >
               Manage Users
             </Button>
-			{" "}
-            <Button
-              variant="primary"
-              onClick={() => history.push("/dashboard/memorials")}
-            >
-              Manage Memorials
-            </Button>
-          </Card.Body>
-        </Card>
-      </>
-    );
-  }
-
-  if (postsLoading) {
-    body = (
-      <div className="spinner-container">
-        <Spinner animation="border" variant="info" />
-      </div>
-    );
-  } else if (posts.length === 0) {
-    body = (
-      <>
-        <Card className="text-center mx-5 my-5">
-          <Card.Header as="h1">Hi {username}</Card.Header>
-          <Card.Body>
-            <Card.Title>Welcome to Anything Project</Card.Title>
-            <Card.Text>
-              Click the button below to track your first skill to learn
-            </Card.Text>
-            <Button
-              variant="primary"
-              onClick={setShowAddPostModal.bind(this, true)}
-            >
-              LearnIt!
-            </Button>
-          </Card.Body>
-        </Card>
-      </>
-    );
-  } else {
-    body = (
-      <>
-        <Row className="row-cols-1 row-cols-md-3 g-4 mx-auto mt-3">
-          {posts.map((post) => (
-            <Col key={post._id} className="my-2">
-              <SinglePost post={post} />
-            </Col>
-          ))}
-        </Row>
-
-        {/* Open Add Post Modal */}
-        <OverlayTrigger
-          placement="left"
-          overlay={<Tooltip>Add a new thing to learn</Tooltip>}
-        >
+          ) : null}{" "}
           <Button
-            className="btn-floating"
-            onClick={setShowAddPostModal.bind(this, true)}
+            variant="primary"
+            onClick={() => history.push("/dashboard/memorials")}
           >
-            <img src={addIcon} alt="add-post" width="60" height="60" />
+            Manage Memorials
           </Button>
-        </OverlayTrigger>
-      </>
-    );
-  }
-
-  return (
-    <>
-      {body}
-      <AddPostModal />
-      {post !== null && <UpdatePostModal />}
-      {/* After post is added, show toast */}
-      <Toast
-        show={show}
-        style={{ position: "fixed", top: "20%", right: "10px" }}
-        className={`bg-${type} text-white`}
-        onClose={setShowToast.bind(this, {
-          show: false,
-          message: "",
-          type: null,
-        })}
-        delay={3000}
-        autohide
-      >
-        <Toast.Body>
-          <strong>{message}</strong>
-        </Toast.Body>
-      </Toast>
+          {" "}
+          <Button
+            variant="primary"
+            onClick={() => setShowChangePasswordModal(true)}
+          >
+            Change Password
+          </Button>
+          <ChangePassword show={showChangePasswordModal} setShow={setShowChangePasswordModal}/>
+        </Card.Body>
+      </Card>
     </>
   );
 };

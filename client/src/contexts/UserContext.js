@@ -6,7 +6,8 @@ import {
     DELETE_USER,
     UPDATE_USER,
     GET_USER,
-    GET_USERS
+    GET_USERS,
+    DELETE_USERS
 } from './constants'
 
 import axios from 'axios'
@@ -68,11 +69,28 @@ const UserContextProvider = ({ children }) => {
             })
             toastSweet('success', 'User deleted successfully')
         } catch (err) {
-            console.log(err)
-            toastSweet('error', err.message || 'User deleted successfully')
+            console.log(err.response)
+            toastSweet('error', err.message || 'Something went wrong')
         }
     }
 
+    const deleteUsers = async (ids) => {
+        try {
+            const res = await axios.delete(apiUrl + '/users', {
+                data: {
+                    ids
+                }
+            })
+            
+            dispatch({
+                type: DELETE_USERS,
+                payload: ids
+            })
+            toastSweet('success', 'Users deleted successfully')
+        } catch (err) {
+            toastSweet('error', err.response.data.message ||  err.message || 'Something is wrong')
+        }
+    }
 
 	return (
 		<UserContext.Provider value={{
@@ -81,6 +99,7 @@ const UserContextProvider = ({ children }) => {
             updateUser,
             addUser,
             deleteUser,
+            deleteUsers,
             showAddUserModal,
             setShowAddUserModal
         }}>

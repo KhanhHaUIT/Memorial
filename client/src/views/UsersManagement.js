@@ -9,12 +9,13 @@ const UsersManagement = () => {
     userState: { users },
     getUsers,
     setShowAddUserModal,
+    deleteUsers
   } = useContext(UserContext);
   const handleUpdateUser = () => {
     console.log(selectionModel);
   };
-  const handleDeleteUser = () => {
-    console.log(selectionModel);
+  const handleDeleteUsers = () => {
+    deleteUsers(selectionModel);
   };
   useEffect(() => {
     getUsers();
@@ -62,7 +63,7 @@ const UsersManagement = () => {
             <button
               type="button"
               className=" mx-2 btn btn-outline-danger"
-              onClick={handleDeleteUser}
+              onClick={handleDeleteUsers}
             >
               Delete
             </button>

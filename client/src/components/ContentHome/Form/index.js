@@ -220,7 +220,7 @@ export default function Form() {
                     <div className="address">
                       <label className="lbl-title">Địa chỉ</label>
                       <div className="grid grid__2 ">
-                        <div className="form-group">
+                        <div className="form-group d-flex">
                           <select
                             name="province"
                             onChange={handleChange}
@@ -250,6 +250,7 @@ export default function Form() {
                             className="select2 select2-hidden-accessible"
                             tabIndex={-1}
                             aria-hidden="true"
+                            style={{marginLeft: '20px'}}
                           >
                             <option>Chọn quận huyện</option>
                             {districtsByProvince.length > 0 &&

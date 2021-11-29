@@ -8,7 +8,7 @@ import { MemorialContext } from "../contexts/MemorialContext";
 const MemorialsManagements = () => {
   const {
     authState: {
-      user: { username, role, _id },
+      user: {  role, id },
     },
   } = useContext(AuthContext);
   const [selectionModel, setSelectionModel] = useState([]);
@@ -17,13 +17,14 @@ const MemorialsManagements = () => {
     addMemorial,
     getMemorials,
     getMemorialsByUser,
+    deleteMemorials
   } = useContext(MemorialContext);
 
   const handleUpdateMemorial = () => {
     console.log(selectionModel);
   }
-  const handleDeleteMemorial = () => {
-    console.log(selectionModel);
+  const handleDeleteMemorials = () => {
+    deleteMemorials(selectionModel);
   }
   const columns = [
     {
@@ -110,7 +111,7 @@ const MemorialsManagements = () => {
               <button
                 type="button"
                 className=" mx-2 btn btn-outline-danger"
-                onClick={handleDeleteMemorial}
+                onClick={handleDeleteMemorials}
               >
                 Delete
               </button>
@@ -122,7 +123,10 @@ const MemorialsManagements = () => {
 
   useEffect(() => {
     if (role !== "admin") {
-      getMemorialsByUser(_id);
+      
+      getMemorialsByUser({
+        userId: id
+      });
     } else {
         getMemorials();
     }

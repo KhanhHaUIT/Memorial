@@ -106,4 +106,45 @@ module.exports = {
         .json({ success: false, message: "Internal server error" });
     }
   },
+  changePassword: async (req, res, next) => {
+    const { password, newPassword } = req.body;
+
+    // Simple validation
+    if (!password)
+      return res
+        .status(400)
+        .json({ success: false, message: "Missing password" });
+    if(!newPassword)
+      return res
+        .status(400)
+        .json({ success: false, message: "Missing new password" });
+
+    try {
+      // Check for existing user
+      const user = await User.findById(req.userId);
+      if (!user)
+        return res
+          .status(400)
+          .json({ success: false, message: "User not found" });
+      if(!await argon2.verify(user.password, password)) {
+        return res
+          .status(400)
+          .json({ success: false, message: "Incorrect password" });
+      }
+      // All good
+      const hashedPassword = await argon2.hash(newPassword);
+      user.password = hashedPassword;
+      await user.save();
+
+      res.json({
+        success: true,
+        message: "Password changed successfully",
+      });
+    } catch (error) {
+      console.log(error);
+      res
+        .status(500)
+        .json({ success: false, message: "Internal server error" });
+    }
+  }
 };

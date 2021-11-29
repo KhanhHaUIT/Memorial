@@ -11,6 +11,28 @@ module.exports = {
       });
     }
   },
+  deleteMemorials: async (req, res) => {
+    if (Object.prototype.toString.call(req.body.ids) === '[object Array]') {
+      try {
+        await Memorial.deleteMany({ _id: { $in: req.body.ids }});
+        return res.status(200).json({
+          success: true,
+          message: 'deleted successfully !!',
+          ids: req.body.ids,
+        });
+      } catch (error) { 
+        return res.status(500).json({
+          success: false,
+          message: error.message || 'Internal Server Error',
+        });
+      }
+    } else {
+      return res.status(400).json({
+        success: false,
+        message: 'ids must be an array !!',
+      });
+    }
+  },
   getMemorial: async (req, res) => {
     try {
       const { id } = req.params;

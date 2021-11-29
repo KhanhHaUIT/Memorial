@@ -9,7 +9,7 @@ const ViewMoreMemorial = () => {
   const {
     memorialState: { memorials },
   } = useContext(MemorialContext);
-  console.log('re-render')
+  
   return (
     <div className="sidebar-2">
       <div className="box-category list-comment">
@@ -19,7 +19,7 @@ const ViewMoreMemorial = () => {
             shuffle(memorials)
               .slice(0, 3)
               .map((item, index) => (
-                <li>
+                <li key={index}>
                   <div class="item">
                     <h3 className="title">
                       <Link to={`/${item._id}`} title="ABC">

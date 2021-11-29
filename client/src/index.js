@@ -6,14 +6,17 @@ import App from "./App";
 import AuthContextProvider from "./contexts/AuthContext";
 import UserContextProvider from "./contexts/UserContext";
 import MemorialContextProvider from "./contexts/MemorialContext";
+import CommentContextProvider from "./contexts/CommentContext";
 
 ReactDOM.render(
   <React.StrictMode>
     <AuthContextProvider>
       <MemorialContextProvider>
-        <UserContextProvider>
-          <App />
-        </UserContextProvider>
+        <CommentContextProvider>
+          <UserContextProvider>
+            <App />
+          </UserContextProvider>
+        </CommentContextProvider>
       </MemorialContextProvider>
     </AuthContextProvider>
   </React.StrictMode>,

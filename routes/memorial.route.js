@@ -6,6 +6,7 @@ const MemorialController = require("../controllers/Memorial.controller");
 const CommentController = require("../controllers/Comment.controller");
 
 router.get("/", MemorialController.getMemorials);
+router.delete("/", MemorialController.deleteMemorials);
 router.post("/", verifyToken, MemorialController.postMemorial);
 router.get("/:id", MemorialController.getMemorial);
 router.delete("/:id", verifyToken, MemorialController.deleteMemorial);
