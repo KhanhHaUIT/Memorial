@@ -35,7 +35,7 @@ const UserContextProvider = ({ children }) => {
     }
     const updateUser = async (user) => {
         try {
-            const res = await axios.put(apiUrl + '/users/' + user.id, user)
+            const res = await axios.put(apiUrl + '/users/' + user._id, user)
             dispatch({
                 type: UPDATE_USER,
                 payload: res.data

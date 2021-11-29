@@ -33,7 +33,7 @@ export const userReducer = (state = {}, action) => {
       return {
         ...state,
         users: state.users.map((user) =>
-          user.id === action.payload.id ? action.payload : user
+          user.id === action.payload._id ? action.payload : user
         ),
       };
     case DELETE_USERS:

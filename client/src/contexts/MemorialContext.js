@@ -4,9 +4,10 @@ import {
   ADD_MEMORIAL,
   GET_MEMORIALS,
   GET_MEMORIAl,
-  DELETE_MEMORIALS
+  DELETE_MEMORIALS,
+  UPDATE_MEMORIAL
 } from "./constants";
-import { memorialReducer, commentReducer } from "../reducers/memorialReducer";
+import { memorialReducer} from "../reducers/memorialReducer";
 import axios from "axios";
 import toastSweet from "../utils/toastSweet";
 

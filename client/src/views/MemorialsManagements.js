@@ -1,9 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useCallback } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { AuthContext } from "../contexts/AuthContext";
 import { MemorialContext } from "../contexts/MemorialContext";
 
-
+import toastSweet from "../utils/toastSweet";
 
 const MemorialsManagements = () => {
   const {
@@ -17,15 +17,36 @@ const MemorialsManagements = () => {
     addMemorial,
     getMemorials,
     getMemorialsByUser,
-    deleteMemorials
+    deleteMemorials,
+    updateMemorial
   } = useContext(MemorialContext);
-
+  const [editRows, setEditRows] = useState({});
   const handleUpdateMemorial = () => {
-    console.log(selectionModel);
+    updateMemorial(editRows);
   }
   const handleDeleteMemorials = () => {
-    deleteMemorials(selectionModel);
+    if (editRows.length === 0) {
+      toastSweet("error", "Please select a memorial to delete");
+      return;
+    } else {
+      deleteMemorials(selectionModel);
+    }
+    
   }
+
+  const handleEditRowsModelChange = useCallback((model) => {
+    const temp = {};
+    if (model && Object.entries(model).length !== 0) {
+      let id = Object.entries(model)[0][0];
+
+      for (let [key, value] of Object.entries(model[id])) {
+        temp[key] = value.value;
+      }
+      temp._id = id;
+    }
+    setEditRows(temp);
+  }, [])
+
   const columns = [
     {
         field: "_id",
@@ -148,6 +169,8 @@ const MemorialsManagements = () => {
         checkboxSelection
         disableSelectionOnClick
         getRowId={(row) => row._id}
+        editMode="row"
+        onEditRowsModelChange={handleEditRowsModelChange}
         onSelectionModelChange={(id) => {
           setSelectionModel(id);
         }}

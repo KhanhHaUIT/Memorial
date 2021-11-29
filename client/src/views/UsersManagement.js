@@ -1,22 +1,44 @@
-import React, { useEffect, useContext, useState } from "react";
+import React, { useEffect, useContext, useState, useCallback } from "react";
 import { UserContext } from "../contexts/UserContext";
 import { DataGrid } from "@mui/x-data-grid";
 import AddUserModal from "../components/management/AddUserModal";
+import toastSweet from "../utils/toastSweet";
 
 const UsersManagement = () => {
   const [selectionModel, setSelectionModel] = useState([]);
+  const [editRows, setEditRows] = useState({});
+
   const {
     userState: { users },
     getUsers,
     setShowAddUserModal,
-    deleteUsers
+    deleteUsers,
+    updateUser,
   } = useContext(UserContext);
   const handleUpdateUser = () => {
-    console.log(selectionModel);
+    updateUser(editRows);
   };
   const handleDeleteUsers = () => {
-    deleteUsers(selectionModel);
+    if (selectionModel.length === 0) {
+      toastSweet("error", "Please select a user to delete");
+      return;
+    } else {
+      deleteUsers(selectionModel);
+    }
   };
+  const handleEditRowsModelChange = useCallback((model) => {
+    const temp = {};
+    if (model && Object.entries(model).length !== 0) {
+      let id = Object.entries(model)[0][0];
+
+      for (let [key, value] of Object.entries(model[id])) {
+        temp[key] = value.value;
+      }
+      temp._id = id;
+    }
+    setEditRows(temp);
+  }, []);
+
   useEffect(() => {
     getUsers();
   }, []);
@@ -25,7 +47,6 @@ const UsersManagement = () => {
       field: "_id",
       headerName: "ID",
       width: 140,
-      editable: true,
     },
     {
       field: "username",
@@ -95,6 +116,8 @@ const UsersManagement = () => {
           checkboxSelection
           disableSelectionOnClick
           getRowId={(row) => row._id}
+          editMode="row"
+          onEditRowsModelChange={handleEditRowsModelChange}
           onSelectionModelChange={(id) => {
             setSelectionModel(id);
           }}
