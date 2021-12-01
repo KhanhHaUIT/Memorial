@@ -155,12 +155,11 @@ export default function DetailMemory() {
               class="item-like art-like-toggle usi_tl_4394881 usi_loaded"
               data-aid="4394881"
               data-type="1"
-              href=";"
               data-total="63"
             >
               <div class="icon"></div>
               <div class="text">
-                Thắp nến <strong class="num">63</strong>
+                Thắp nến <strong class="num">{memorial?.candles?.length}</strong>
               </div>
             </a>
             <div class="social">

@@ -26,7 +26,7 @@ export const memorialReducer = (state, action) => {
     case UPDATE_MEMORIAL:
       return {
         ...state,
-        memorials: state.users.map((memorial) =>
+        memorials: state.memorials.map((memorial) =>
           memorial._id === action.payload._id ? action.payload : memorial
         ),
       };

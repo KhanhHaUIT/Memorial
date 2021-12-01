@@ -13,7 +13,7 @@ export default function Header() {
       <section className="wrap-main-nav" id="wrap-main-nav">
         <div className="wrap flex">
           <div className="left-head">
-            <a href="/" className="logo-vne" title="VnExpress">
+            <a  className="logo-vne" title="VnExpress">
               <img
                 src="https://s1.vnecdn.net/vnexpress/restruct/j/v2623/event/tnnncovid/images/graphics/VnExpress-white.svg"
                 alt="VnExpress"

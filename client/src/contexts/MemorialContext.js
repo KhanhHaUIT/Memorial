@@ -7,7 +7,7 @@ import {
   DELETE_MEMORIALS,
   UPDATE_MEMORIAL
 } from "./constants";
-import { memorialReducer} from "../reducers/memorialReducer";
+import { memorialReducer } from "../reducers/memorialReducer";
 import axios from "axios";
 import toastSweet from "../utils/toastSweet";
 
@@ -75,6 +75,19 @@ const MemorialContextProvider = ({ children }) => {
     }
   };
 
+  const toggleCandles = async (id) => {
+    try {
+      const res = await axios.patch(`${apiUrl}/memorials/${id}/candles`);
+      dispatch({
+        type: UPDATE_MEMORIAL,
+        payload: res.data,
+      });
+      toastSweet("success", "Candles toggled successfully");
+    } catch (err) {
+      toastSweet("error", err.response.data.message ||  err.message || 'Something is wrong')
+    }
+  };
+
   return (
     <MemorialContext.Provider
       value={{
@@ -83,7 +96,8 @@ const MemorialContextProvider = ({ children }) => {
         getMemorials,
         getMemorial,
         getMemorialsByUser,
-        deleteMemorials
+        deleteMemorials,
+        toggleCandles
  
       }}
     >

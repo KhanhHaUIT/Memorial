@@ -139,13 +139,13 @@ module.exports = {
       let index = memorial.candles.indexOf(req.userId);
       if (index > -1) {
         memorial.candles.splice(index, 1);
-        memorial.save();
+        await memorial.save();
       }else{
         memorial.candles.push(req.userId);
-        memorial.save();
+        await memorial.save();
       }
 
-      return res.json(updatedMemorial);
+      return res.json(memorial);
     } catch (error) {
       res.status(500).json({
         success: false,

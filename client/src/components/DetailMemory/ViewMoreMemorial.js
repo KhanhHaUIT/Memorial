@@ -43,7 +43,7 @@ const ViewMoreMemorial = () => {
                     <div className="social cmt-show" cmt-show={1}>
                       <a
                         className="item-like art-like-toggle usi_tl_4393713 usi_loaded"
-                        href="/"
+                        
                         onClick="VNE.Comment_Ext.likeArticle(4393713)"
                         data-aid={4393713}
                         data-type={1}
@@ -55,12 +55,12 @@ const ViewMoreMemorial = () => {
                         </div>
                         <div className="text">
                           Thắp nến
-                          <strong className="num">83</strong>
+                          <strong className="num">{item?.candles?.length}</strong>
                         </div>
                       </a>
                       <a
                         className="count_cmt comment"
-                        href="/"
+                        
                         style={{ whiteSpace: "nowrap", display: "none" }}
                       >
                         <span className="font_icon number widget-comment-4393713-1"></span>

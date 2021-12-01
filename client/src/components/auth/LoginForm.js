@@ -86,7 +86,7 @@ const LoginForm = () => {
                 <span className="focus-input100" data-symbol="" />
               </div>
               <div className="text-right p-t-8 p-b-31">
-                <a href="/"> Forgot password? </a>
+                <a > Forgot password? </a>
               </div>
               <div className="container-login100-form-btn">
                 <div className="wrap-login100-form-btn">
@@ -98,19 +98,19 @@ const LoginForm = () => {
                 <span> Or Sign Up Using </span>
               </div>
               <div className="flex-c-m">
-                <a href="/" className="login100-social-item bg1">
+                <a  className="login100-social-item bg1">
                   <i className="fa fa-facebook" />
                 </a>
-                <a href="/" className="login100-social-item bg2">
+                <a  className="login100-social-item bg2">
                   <i className="fa fa-twitter" />
                 </a>
-                <a href="/" className="login100-social-item bg3">
+                <a  className="login100-social-item bg3">
                   <i className="fa fa-google" />
                 </a>
               </div>
               <div className="flex-col-c p-t-155">
                 <span className="txt1 p-b-17"> Or Sign Up Using </span>
-                {/* <a href="/" className="txt2">
+                {/* <a  className="txt2">
                   Sign Up
                 </a> */}
                 <Link to="/register" className="txt2">

@@ -8,6 +8,7 @@ const CommentController = require("../controllers/Comment.controller");
 router.get("/", MemorialController.getMemorials);
 router.delete("/", MemorialController.deleteMemorials);
 router.post("/", verifyToken, MemorialController.postMemorial);
+router.get("/comments", verifyToken, CommentController.getCommentsOfMemorials);
 router.get("/:id", MemorialController.getMemorial);
 router.delete("/:id", verifyToken, MemorialController.deleteMemorial);
 router.put("/:id", verifyToken, MemorialController.updateMemorial);

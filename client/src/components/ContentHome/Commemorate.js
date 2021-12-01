@@ -8,9 +8,10 @@ export default function Commemorate() {
   const {
     memorialState: { memorials },
     getMemorials,
+    toggleCandles
   } = useContext(MemorialContext);
 
-
+ 
 
   useEffect(() => {
     getMemorials();
@@ -65,10 +66,11 @@ export default function Commemorate() {
                   </div>
 
                   <div className="social cmt-show" cmt-show={1}>
-                    <a
+                    <button
                       className="item-like art-like-toggle usi_tl_4393713 usi_loaded"
-                      href="/"
-                      onClick="VNE.Comment_Ext.likeArticle(4393713)"
+                      onClick={() => {
+                        toggleCandles(memorial._id);
+                      }}
                       data-aid={4393713}
                       data-type={1}
                       title="Thắp nến"
@@ -80,13 +82,12 @@ export default function Commemorate() {
                       <div className="text">
                         Thắp nến
                         {" "}
-                        <strong className="num">{Math.floor(Math.random() * 100)}</strong>
+                        <strong className="num">{memorial?.candles?.length}</strong>
                       </div>
-                    </a>
-                    <a href="/" className="face"></a>
+                    </button>
+                    <a className="face"></a>
                     <a
                       className="count_cmt comment"
-                      href="/"
                       style={{ whiteSpace: "nowrap", display: "none" }}
                     >
                       <span className="font_icon number widget-comment-4393713-1"></span>

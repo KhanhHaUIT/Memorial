@@ -24,17 +24,6 @@ export default function Background() {
             >
               Gửi lời tưởng nhớ
             </a>
-            {param.cardId ? (
-              <></>
-            ) : (
-              <a
-                className="btn-default bg tuong_nho"
-                href="javascript:;"
-                title="Gửi lời tưởng nhớ"
-              >
-                Gửi lời tưởng nhớ
-              </a>
-            )}
           </div>
           <a className="scroll_down v2 hidden-pc" href="javascript:;">
             <div className="scroll_down_btn">
