@@ -2,11 +2,11 @@ const swaggerAutogen = require('swagger-autogen')();
 
 const doc = {
   info: {
-    title: 'Anything API',
-    description: '',
+    title: 'Memorial API',
+    description: 'Created by KHANHHA PROVJP',
   },
-  host: 'localhost:4000',
-  schemes: ['http', 'https'],
+  host: ' memorial-two.herokuapp.com',
+  schemes: ['https'],
   consumes: ['application/json'],
   produces: ['application/json'],
   securityDefinitions: {
