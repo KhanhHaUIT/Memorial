@@ -5,7 +5,7 @@
     "description": "Created by KHANHHA PROVJP",
     "version": "1.0.0"
   },
-  "host": " memorial-two.herokuapp.com",
+  "host": "memorial-two.herokuapp.com",
   "basePath": "/",
   "tags": [],
   "schemes": [

@@ -5,7 +5,7 @@ const doc = {
     title: 'Memorial API',
     description: 'Created by KHANHHA PROVJP',
   },
-  host: ' memorial-two.herokuapp.com',
+  host: 'memorial-two.herokuapp.com',
   schemes: ['https'],
   consumes: ['application/json'],
   produces: ['application/json'],
