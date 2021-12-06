@@ -1,3 +1,3 @@
 # anything
-# api docs: https://anything-gg.herokuapp.com/api/docs
-# demo pages: https://anything-delta.vercel.app
+# api docs: https://memorial-two.herokuapp.com/api/docs
+# demo pages: https://memorial-two.vercel.app/
