@@ -20,7 +20,7 @@ const Dashboard = () => {
       <Card className="text-center mx-5 my-5">
         <Card.Header as="h1">Hi {username}</Card.Header>
         <Card.Body>
-          <Card.Title>Welcome to Anything Project</Card.Title>
+          <Card.Title>Welcome to Memorial Project</Card.Title>
           <Card.Text>
             Click the button below to go to{" "}
             {role === "admin" ? "users and memorials" : "memorials"}{" "}

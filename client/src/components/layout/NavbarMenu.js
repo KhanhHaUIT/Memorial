@@ -27,7 +27,7 @@ const NavbarMenu = () => {
           height="32"
           className="mr-2"
         />
-        anything
+        Memorial
       </Navbar.Brand>
 
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
