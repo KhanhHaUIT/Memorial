@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Commemorate.css";
 import Candle from "../../assets/candle.png";
 import { MemorialContext } from "../../contexts/MemorialContext";
@@ -8,14 +8,25 @@ export default function Commemorate() {
   const {
     memorialState: { memorials },
     getMemorials,
-    toggleCandles
+    toggleCandles,
+    searchMemorials
   } = useContext(MemorialContext);
 
+  
+  const [keyword, setKeyword] = useState("");
  
+  const handleSearch = e => {
+    searchMemorials(keyword);
+    
+    setKeyword("");
+    
+  }
 
   useEffect(() => {
     getMemorials();
   }, []);
+
+  
 
   return (
     <section className="section-frame2 clearfix">
@@ -29,6 +40,9 @@ export default function Commemorate() {
               name="q"
               placeholder="Tìm kiếm theo tên"
               autoComplete="off"
+              onChange={e => setKeyword(e.target.value)}
+              value={keyword}
+             
             />
 
             <button
@@ -36,6 +50,8 @@ export default function Commemorate() {
               title="Tìm kiếm"
               className="btn-search-vne"
               id="searchForum"
+              onClick={handleSearch}
+              
             >
               <i className="bi bi-search"></i>
             </button>

@@ -38,6 +38,9 @@ const connectDB = async () => {
 connectDB();
 
 
+app.all("/", function (req, res, next) {
+  res.send("Server is running");
+});
 
 
 app.use(express.json());

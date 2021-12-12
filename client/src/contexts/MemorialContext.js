@@ -5,7 +5,8 @@ import {
   GET_MEMORIALS,
   GET_MEMORIAl,
   DELETE_MEMORIALS,
-  UPDATE_MEMORIAL
+  UPDATE_MEMORIAL,
+  SEARCH_MEMORIALS
 } from "./constants";
 import { memorialReducer } from "../reducers/memorialReducer";
 import axios from "axios";
@@ -75,9 +76,24 @@ const MemorialContextProvider = ({ children }) => {
     }
   };
 
+  const searchMemorials = async (keyword) => {
+    try {
+      const res = await axios.get(`${apiUrl}/memorials?keyword=${keyword}`);
+      console.log(res.data);
+      dispatch({
+        type: GET_MEMORIALS,
+        payload: res.data,
+      });
+    } catch (err) {
+      toastSweet("error", err.response.data.message ||  err.message || 'Something is wrong')
+    }
+  };
+
+
   const toggleCandles = async (id) => {
     try {
       const res = await axios.patch(`${apiUrl}/memorials/${id}/candles`);
+      
       dispatch({
         type: UPDATE_MEMORIAL,
         payload: res.data,
@@ -97,8 +113,8 @@ const MemorialContextProvider = ({ children }) => {
         getMemorial,
         getMemorialsByUser,
         deleteMemorials,
-        toggleCandles
- 
+        toggleCandles,
+        searchMemorials
       }}
     >
       {children}

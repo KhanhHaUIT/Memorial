@@ -2,8 +2,18 @@ const Memorial = require("../models/Memorial.model");
 module.exports = {
   getMemorials: async (req, res) => {
     try {
-      const memorials = await Memorial.find();
-      res.json(memorials);
+      if(!req.query.keyword) {
+        const memorials = await Memorial.find();
+        res.json(memorials);
+      } else {
+        const memorials = await Memorial.find({
+          deceasedPersonName: {
+            $regex: req.query.keyword,
+            $options: "i"
+          }
+        });
+        res.json(memorials); 
+      }
     } catch (error) {
       res.status(500).json({
         success: false,
